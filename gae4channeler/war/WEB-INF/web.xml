@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<filter>
+		<filter-name>ObjectifyFilter</filter-name>
+		<filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ObjectifyFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>Gae4channeler</servlet-name>
+		<servlet-class>it.sirbotta.gae4channeler.Gae4channelerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Gae4channeler</servlet-name>
+		<url-pattern>/gae4channeler</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>StoreImageServlet</servlet-name>
+		<servlet-class>it.sirbotta.gae4channeler.StoreImageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StoreImageServlet</servlet-name>
+		<url-pattern>/store</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CrawlerServlet</servlet-name>
+		<servlet-class>it.sirbotta.gae4channeler.CrawlerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CrawlerServlet</servlet-name>
+		<url-pattern>/crawl</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>PageServlet</servlet-name>
+		<servlet-class>it.sirbotta.gae4channeler.PageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PageServlet</servlet-name>
+		<url-pattern>/page</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>WelcomeServlet</servlet-name>
+		<servlet-class>it.sirbotta.gae4channeler.WelcomeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WelcomeServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>FlushMetricServlet</servlet-name>
+		<servlet-class>it.sirbotta.gae4channeler.FlushMetricServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FlushMetricServlet</servlet-name>
+		<url-pattern>/flushmetric</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SystemServiceServlet</servlet-name>
+		<servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
+		<init-param>
+			<param-name>services</param-name>
+			<param-value/>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SystemServiceServlet</servlet-name>
+		<url-pattern>/_ah/spi/*</url-pattern>
+	</servlet-mapping>
+	<listener>
+		<description>Objectify Register Listener</description>
+		<listener-class>it.sirbotta.gae4channeler.ofyStartupListener</listener-class>
+	</listener>
+</web-app>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+  <cron>
+    <url>/crawl?page=adult&#38;npage=9</url>
+    <description>Crawl all adult for 10 page every 3 hours</description>
+    <schedule>every 3 hours</schedule>
+    <target>crawler</target>
+  </cron>
+  <cron>
+    <url>/crawl?page=SFW&#38;npage=9</url>
+    <description>Crawl all SFW for 10 page every 3 hours</description>
+    <schedule>every 24 hours</schedule>
+    <target>crawler</target>
+  </cron>
+  <cron>
+    <url>/crawl?page=adult&#38;npage=1</url>
+    <description>Crawl all adult for 1 page every 1 hour</description>
+    <schedule>every 1 hours</schedule>
+    <target>crawler</target>
+  </cron>
+  <cron>
+    <url>/flushmetric?metric=incomingBandwith</url>
+    <description>Flush incomingBandwith at reset quota time</description>
+    <schedule>every day 08:05</schedule>
+  </cron>
+</cronentries>
