@@ -50,8 +50,7 @@ public class StoreImageServlet extends HttpServlet {
 		String type = s[1];
 		type = (type.equals("jpg")) ? "jpeg" : type;
 
-		byte[] yourBinaryData = jsoupGetImage(imageurl);
-
+		byte[] yourBinaryData;
 		Query query = new Query("__BlobInfo__");
 		query.addFilter("filename", FilterOperator.EQUAL, name);
 		query.addSort("creation", SortDirection.DESCENDING);
@@ -66,6 +65,12 @@ public class StoreImageServlet extends HttpServlet {
 
 		// se il blob non esiste giˆ e ho binary data
 		if (queriedFile == null) {
+			resp.setContentType("text/plain");
+			resp.getWriter().println(imageurl);
+			resp.sendRedirect(imageurl);
+			
+			yourBinaryData = jsoupGetImage(imageurl);
+				
 			if (yourBinaryData != null) {
 				FileService fileService = FileServiceFactory.getFileService();
 
@@ -89,21 +94,30 @@ public class StoreImageServlet extends HttpServlet {
 				log.warning("can't retrive image from " + imageurl);
 			}
 		}
-
-		// se non trovo i binarydata ma ho il blob
-		if (yourBinaryData == null) {
-			if (queriedFile != null) {
-				BlobKey bKey = new BlobKey(queriedFile.getKey().getName());
-				// get url
-				imageurl = imagesService
-						.getServingUrl(ServingUrlOptions.Builder
-								.withBlobKey(bKey));
+		else
+		{
+			if(checkUrl(imageurl))
+			{
+			
+			BlobKey bKey = new BlobKey(queriedFile.getKey().getName());
+			// get url
+			imageurl = imagesService
+					.getServingUrl(ServingUrlOptions.Builder
+							.withBlobKey(bKey));
+			resp.setContentType("text/plain");
+			resp.getWriter().println(imageurl);
+			resp.sendRedirect(imageurl);
+			}
+			else
+			{
+				resp.setContentType("text/plain");
+				resp.getWriter().println(imageurl);
+				resp.sendRedirect(imageurl);
 			}
 		}
 
-		resp.setContentType("text/plain");
-		resp.getWriter().println(imageurl);
-		resp.sendRedirect(imageurl);
+
+		
 
 	}
 
@@ -139,6 +153,33 @@ public class StoreImageServlet extends HttpServlet {
 		}
 
 	}
+	
+	public static Boolean checkUrl(String uri)
+	{
+		try {
+			int status = Jsoup
+			.connect(uri)
+			.ignoreContentType(true)
+			.userAgent(
+					"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/536.26.17 (KHTML, like Gecko) Version/6.0.2 Safari/536.26.17")
+			.cookie("auth", "token").timeout(3000).execute().statusCode();
+			
+			if(status==200)
+			{
+				return true;
+			}else
+			{
+				return false;
+			}
+			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 
 	public static byte[] netUrlGetImage(String uri) throws IOException {
 		URL url = new URL(uri);

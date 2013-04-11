@@ -1,4 +1,4 @@
-Pure Servlet implementation of a 4chan viewer, using 4chan API. Just a project fro try out Google APP Engine Capabilities. (a bit mess )
+Pure Servlet implementation of a 4chan viewer, using 4chan API. Just a project fro try out Google APP Engine Capabilities. (a bit mess in html but faster then jsp,jsf ecc)
 
 USED
 ----
