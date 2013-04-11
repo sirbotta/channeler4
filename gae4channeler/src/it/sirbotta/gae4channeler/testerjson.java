@@ -14,7 +14,6 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.appengine.api.datastore.Text;
 
 public class testerjson {
 
@@ -104,6 +103,7 @@ public class testerjson {
 		while (postNode.hasNext()) {
 
 			JsonNode p = postNode.next();
+			@SuppressWarnings("unused")
 			String no = p.path("no").asText();
 			String tim = p.path("tim").asText();
 			String ext = p.path("ext").asText();

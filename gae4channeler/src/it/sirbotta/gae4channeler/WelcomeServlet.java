@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
 public class WelcomeServlet extends HttpServlet {
+	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(WelcomeServlet.class
 			.getName());
 
@@ -38,10 +39,11 @@ public class WelcomeServlet extends HttpServlet {
 						// + "<link href='css/lightbox.css' rel='stylesheet' />"
 						+ "<link href='css/style.css' rel='stylesheet' />"
 						+ "</head>" + "<body>");
-		resp.getWriter().println(
-				"<h1>Welcome to 4channeler a new 4chan.org way of view</h1>");
+		
 
 		resp.getWriter().println("<div class='content'>");
+		resp.getWriter().println(
+				"<h1>Welcome to 4channeler a new 4chan.org way of view</h1>");
 
 		resp.getWriter().println(
 				"<div class='box-outer top-box' id='announce'>");

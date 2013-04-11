@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cronentries>
   <cron>
-    <url>/crawl?page=adult&#38;npage=9</url>
-    <description>Crawl all adult for 10 page every 3 hours</description>
+    <url>/crawl?page=adult&#38;npage=3</url>
+    <description>Crawl all adult for 3 page every 3 hours</description>
     <schedule>every 3 hours</schedule>
     <target>crawler</target>
   </cron>
   <cron>
-    <url>/crawl?page=SFW&#38;npage=9</url>
-    <description>Crawl all SFW for 10 page every 3 hours</description>
+    <url>/crawl?page=SFW&#38;npage=3</url>
+    <description>Crawl all SFW for 3 page every 3 hours</description>
     <schedule>every 24 hours</schedule>
     <target>crawler</target>
   </cron>

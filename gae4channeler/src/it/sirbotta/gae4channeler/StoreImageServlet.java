@@ -37,11 +37,13 @@ public class StoreImageServlet extends HttpServlet {
 	private static final Logger log = Logger.getLogger(StoreImageServlet.class
 			.getName());
 
+	@SuppressWarnings("deprecation")
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 
 		String imageurl = req.getParameter("image");
 		String[] s = imageurl.replace("http://", "").split("/");
+		@SuppressWarnings("unused")
 		String page = s[1];
 		String name = s[3];
 		s = name.split("\\.");

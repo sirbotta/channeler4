@@ -6,7 +6,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,10 +21,8 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -43,7 +40,7 @@ public class CrawlerServlet extends HttpServlet {
 		int npage = (snpage == null) ? 1 : Integer.parseInt(snpage);
 
 		long startPageScrapeTime = System.currentTimeMillis();
-		// List<Chan4Thread> test =
+		// if perchè il case sulle string non va ancora
 		if (page.equals("adult")) {
 			jsonSave4ChanThreads("s", npage);
 			log.info("Thread:" + nthread + " Image:" + nimages);
@@ -200,7 +197,6 @@ public class CrawlerServlet extends HttpServlet {
 			while (postNode.hasNext()) {
 
 				JsonNode p = postNode.next();
-				String no = p.path("no").asText();
 				String tim = p.path("tim").asText();
 				String ext = p.path("ext").asText();
 				String com = p.path("com").asText();
@@ -267,7 +263,7 @@ public class CrawlerServlet extends HttpServlet {
 
 		return outputStream.toByteArray();
 	}
-
+	//old
 	public Element retrive4ChanBoardElements(String uri) throws IOException {
 		ofyChan4Metric incomingBandwith = ofy().load()
 				.type(ofyChan4Metric.class).id("incomingBandwith").get();
@@ -303,7 +299,7 @@ public class CrawlerServlet extends HttpServlet {
 
 	}
 
-	// TODO da sistemare per ora ha ancora pezzi del vecchio
+	// TODO old
 	public List<Chan4Thread> retrive4ChanThreads(String page, int npage)
 			throws IOException {
 		List<Chan4Thread> threads = new ArrayList<Chan4Thread>();
